@@ -1,0 +1,310 @@
+{
+  "info": {
+    "_postman_id": "b7d2f8a1-4c3e-4a9b-9f2a-6e1c0d4e8a55",
+    "name": "Holistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Holistics business intelligence platform. Authenticate with a per-user API key in the X-Holistics-Key header. Regional hosts: secure.holistics.io (APAC), us.holistics.io (US), eu.holistics.io (EU).\n\nContact Support:\n Name: Holistics Support\n Email: support@holistics.io",
+      "type": "text/plain"
+    }
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Holistics-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{holisticsApiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.holistics.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "item": [
+    {
+      "name": "Datasets",
+      "description": {
+        "content": "Query the Holistics dataset semantic layer.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "List available datasets",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/data_sets",
+              "host": ["{{baseUrl}}"],
+              "path": ["data_sets"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get dataset dimensions and metrics",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/data_sets/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["data_sets", ":id"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query a dataset",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dimensions\": [\"<string>\"],\n  \"metrics\": [\"<string>\"],\n  \"filters\": [],\n  \"limit\": 1000\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/data_sets/:id/submit_query",
+              "host": ["{{baseUrl}}"],
+              "path": ["data_sets", ":id", "submit_query"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Generate SQL without executing",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dimensions\": [\"<string>\"],\n  \"metrics\": [\"<string>\"],\n  \"filters\": [],\n  \"limit\": 1000\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/data_sets/:id/generate_sql",
+              "host": ["{{baseUrl}}"],
+              "path": ["data_sets", ":id", "generate_sql"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "description": {
+        "content": "Submit report queries and retrieve results.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Submit a report query job",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/queries/:report_id/submit_query.json",
+              "host": ["{{baseUrl}}"],
+              "path": ["queries", ":report_id", "submit_query.json"],
+              "variable": [{ "key": "report_id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve report query results",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/queries/get_query_results.json?job_id=<job_id>&_page_size=100&_page=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["queries", "get_query_results.json"],
+              "query": [
+                { "key": "job_id", "value": "<job_id>" },
+                { "key": "_page_size", "value": "100" },
+                { "key": "_page", "value": "1" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Export",
+      "description": {
+        "content": "Asynchronous report data export jobs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Submit a report export job",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/queries/:report_id/submit_export.:format",
+              "host": ["{{baseUrl}}"],
+              "path": ["queries", ":report_id", "submit_export.:format"],
+              "variable": [
+                { "key": "report_id", "value": "1" },
+                { "key": "format", "value": "csv" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve export job status",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/queries/get_export_results.json?job_id=<job_id>",
+              "host": ["{{baseUrl}}"],
+              "path": ["queries", "get_export_results.json"],
+              "query": [{ "key": "job_id", "value": "<job_id>" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Download an export result file",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/exports/download?job_id=<job_id>",
+              "host": ["{{baseUrl}}"],
+              "path": ["exports", "download"],
+              "query": [{ "key": "job_id", "value": "<job_id>" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Data Pipeline",
+      "description": {
+        "content": "Execute data imports and transforms.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Execute a data import job",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/data_imports/:data_import_id/execute.json",
+              "host": ["{{baseUrl}}"],
+              "path": ["data_imports", ":data_import_id", "execute.json"],
+              "variable": [{ "key": "data_import_id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Execute a data transform job",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/data_transforms/:data_transform_id/execute.json",
+              "host": ["{{baseUrl}}"],
+              "path": ["data_transforms", ":data_transform_id", "execute.json"],
+              "variable": [{ "key": "data_transform_id", "value": "1" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Jobs",
+      "description": {
+        "content": "Poll ETL and export job status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "View running job information",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/:job_id/logs.json",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs", ":job_id", "logs.json"],
+              "variable": [{ "key": "job_id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check status of recent ETL jobs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/last_run_jobs.json?source_type=DataTransform&ids[]=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs", "last_run_jobs.json"],
+              "query": [
+                { "key": "source_type", "value": "DataTransform" },
+                { "key": "ids[]", "value": "1" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

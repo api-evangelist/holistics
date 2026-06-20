@@ -1,0 +1,139 @@
+aid: holistics
+url: https://raw.githubusercontent.com/api-evangelist/holistics/refs/heads/main/apis.yml
+name: Holistics
+kind: company
+description: Holistics is a self-service business intelligence and analytics platform
+  built around code-based data modeling (AML - Analytics Modeling Language), Git
+  version control, and a SQL/dataset semantic layer. Its REST API lets teams query
+  datasets and reports, export data to CSV/JSON/XLSX, trigger data imports and
+  transforms, and poll ETL jobs, while a JWT-signed Embed API powers embedded,
+  multi-tenant analytics inside customer applications.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Business Intelligence
+- Analytics
+- Self-Service BI
+- Data Modeling
+- Embedded Analytics
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: holistics:holistics-data-schedules-jobs-api
+  name: Holistics Data Schedules & Jobs API
+  tags:
+  - Data Pipeline
+  - Jobs
+  - ETL
+  - Schedules
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs-v2.holistics.io/api/data-pipeline-api
+  baseURL: https://secure.holistics.io/api/v2
+  properties:
+  - url: https://docs-v2.holistics.io/api/data-pipeline-api
+    type: Documentation
+  - url: https://docs-v2.holistics.io/api
+    type: APIReference
+  - url: openapi/holistics-openapi.yml
+    type: OpenAPI
+  - url: collections/holistics.postman_collection.json
+    type: PostmanCollection
+  description: Programmatically execute data imports and data transforms, and poll
+    ETL job status (logs and last-run jobs) for Holistics data pipelines.
+- aid: holistics:holistics-dashboards-reports-api
+  name: Holistics Dashboards & Reports API
+  tags:
+  - Reports
+  - Dashboards
+  - Datasets
+  - Query
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs-v2.holistics.io/api/getting-report-data-api
+  baseURL: https://secure.holistics.io/api/v2
+  properties:
+  - url: https://docs-v2.holistics.io/api/getting-report-data-api
+    type: Documentation
+  - url: https://docs.holistics.io/api/v2/query-data
+    type: APIReference
+  - url: openapi/holistics-openapi.yml
+    type: OpenAPI
+  - url: collections/holistics.postman_collection.json
+    type: PostmanCollection
+  description: Submit report and dataset queries, generate SQL without executing,
+    and retrieve paginated query results from Holistics reports and the dataset
+    semantic layer.
+- aid: holistics:holistics-export-api
+  name: Holistics Export API
+  tags:
+  - Export
+  - CSV
+  - JSON
+  - XLSX
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs-v2.holistics.io/api/getting-report-data-api
+  baseURL: https://secure.holistics.io/api/v2
+  properties:
+  - url: https://docs-v2.holistics.io/api/getting-report-data-api
+    type: Documentation
+  - url: openapi/holistics-openapi.yml
+    type: OpenAPI
+  - url: collections/holistics.postman_collection.json
+    type: PostmanCollection
+  description: Submit asynchronous export jobs for report data in CSV, JSON, or XLSX
+    format, poll export job status, and download the resulting file.
+- aid: holistics:holistics-users-permissions-api
+  name: Holistics Users & Permissions API
+  tags:
+  - Users
+  - Permissions
+  - API Keys
+  - Authentication
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs-v2.holistics.io/docs/holistics-api-for-python-and-programmatic-platform-access
+  baseURL: https://secure.holistics.io/api/v2
+  properties:
+  - url: https://docs-v2.holistics.io/docs/holistics-api-for-python-and-programmatic-platform-access
+    type: Documentation
+  - url: openapi/holistics-openapi.yml
+    type: OpenAPI
+  description: Per-user API keys generated in user settings authorize programmatic
+    access via the X-Holistics-Key header; permissions and row-level access follow
+    the calling user's account scope.
+- aid: holistics:holistics-embedded-analytics-api
+  name: Holistics Embedded Analytics API
+  tags:
+  - Embedded Analytics
+  - JWT
+  - Embed Token
+  - Multi-Tenant
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs-v2.holistics.io/docs/embedded-analytics/
+  baseURL: https://secure.holistics.io
+  properties:
+  - url: https://docs-v2.holistics.io/docs/embedded-analytics/
+    type: Documentation
+  - url: https://www.holistics.io/bi-tools/concepts/jwt-embedding/
+    type: APIReference
+  - url: openapi/holistics-openapi.yml
+    type: OpenAPI
+  description: Server-side JWT (HS256) signed embed tokens carrying customer_id, exp,
+    and dynamic filter claims render row-level-secured dashboards via the
+    /embed/<embed_code>?_token=<jwt> URL pattern for multi-tenant embedded analytics.
+common:
+- type: GitHubOrganization
+  url: https://github.com/holistics
+- type: LinkedIn
+  url: https://www.linkedin.com/company/holistics
+- type: Website
+  url: https://www.holistics.io
+- type: Documentation
+  url: https://docs-v2.holistics.io/api
+- type: Plans
+  url: plans/holistics-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/holistics-rate-limits.yml
+- type: FinOps
+  url: finops/holistics-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

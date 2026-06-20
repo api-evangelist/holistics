@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Holistics
+providerId: holistics
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Business Intelligence
+- Analytics
+- Self-Service BI
+- Data Modeling
+- Embedded Analytics
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Holistics does not publish specific numeric REST API rate limits in its
+  public documentation. Programmatic access is authorized per user via the
+  X-Holistics-Key header, and query and export work is executed asynchronously
+  as jobs that are polled for status, which naturally bounds concurrency.
+  Practical limits are governed by report/dataset query complexity, the
+  underlying data warehouse, and account/plan scope. Specific per-account
+  values are not reconciled in this artifact.
+notes: >-
+  No numeric RPM/TPM-style limits are documented publicly. Confirm any account
+  or job-concurrency limits with Holistics support during reconciliation.
+sources:
+- https://docs-v2.holistics.io/api
+- https://docs-v2.holistics.io/api/getting-report-data-api
+- https://docs-v2.holistics.io/api/data-pipeline-api
+responseCodes:
+  throttled: 429
+limits:
+- name: Per-User API Key
+  scope: user
+  metric: requests
+  limit: see provider documentation
+  notes: Access is authorized by a per-user API key; no public numeric request cap is documented.
+- name: Query Job Concurrency
+  scope: account
+  metric: jobs
+  limit: see provider documentation
+  notes: Report and dataset queries run as asynchronous jobs polled for results; concurrency is bounded by account and warehouse.
+- name: Export Job Concurrency
+  scope: account
+  metric: jobs
+  limit: see provider documentation
+  notes: Export jobs (CSV/JSON/XLSX) run asynchronously and are downloaded once status is success.
+- name: Data Pipeline Execution
+  scope: account
+  metric: jobs
+  limit: see provider documentation
+  notes: Data import and transform executions are queued as ETL jobs; throughput depends on the data pipeline and warehouse.
+policies:
+- name: Asynchronous Jobs
+  description: Queries, exports, and pipeline runs execute as jobs; clients poll job status endpoints rather than holding long synchronous connections.
+- name: Backoff Strategy
+  description: Clients should poll job status with reasonable intervals and implement exponential backoff with jitter on 429/5xx responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

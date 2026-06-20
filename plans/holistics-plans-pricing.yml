@@ -1,0 +1,219 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Holistics
+providerId: holistics
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Business Intelligence
+- Analytics
+- Self-Service BI
+- Data Modeling
+- Embedded Analytics
+- Plans
+description: >-
+  Holistics prices on a per-platform subscription model with three published
+  tiers (Entry, Standard, Security Compliance Suite) plus a Custom enterprise
+  tier. Each tier includes the first 10 users and bills additional users and
+  additional report packs as add-ons. Prices below are list (US) and are lower
+  on annual billing. The REST API and Embed API are platform capabilities of
+  the subscription rather than separately metered usage products; Embedded
+  Analytics is sold under a separate model with unlimited viewers and
+  white-labeling.
+notes: >-
+  Representative list prices from the Holistics pricing page; the page shows
+  region (US / Singapore / EU) and monthly vs. annual variants. Embedded
+  Analytics and Custom tiers are quote-based. Verify current figures on the
+  pricing page.
+sources:
+- https://www.holistics.io/pricing/
+- https://docs-v2.holistics.io/api
+plans:
+- id: holistics-entry
+  name: Entry
+  type: subscription
+  description: >-
+    Core self-service analytics with Canvas dashboards, Git version control,
+    dbt integration, and code-based modeling. First 10 users and 100 reports
+    included.
+  entries:
+  - label: Platform Subscription
+    name: entry_platform
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $960/month ($800/month annual)
+    userMultiplied: false
+  - label: Included Users
+    name: entry_users
+    type: flat
+    metric: users
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 10
+    price: included
+    userMultiplied: false
+  - label: Additional User
+    name: entry_additional_user
+    type: usage
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $15/month per user
+    userMultiplied: true
+  - label: Additional 100 Reports
+    name: entry_additional_reports
+    type: usage
+    metric: reports
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 100
+    price: $120/month per 100 reports
+    userMultiplied: false
+  elements:
+  - name: Self-Service Analytics
+  - name: Canvas Dashboard
+  - name: Git Version Control
+  - name: dbt Integration
+  - name: REST API
+- id: holistics-standard
+  name: Standard
+  type: subscription
+  description: >-
+    Everything in Entry plus unlimited reports, custom charts, custom dataset
+    views, Git repository connection, and Google SSO. Recommended tier.
+  entries:
+  - label: Platform Subscription
+    name: standard_platform
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $1,200/month ($1,000/month annual)
+    userMultiplied: false
+  - label: Included Users
+    name: standard_users
+    type: flat
+    metric: users
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 10
+    price: included
+    userMultiplied: false
+  - label: Additional User
+    name: standard_additional_user
+    type: usage
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $15/month per user
+    userMultiplied: true
+  elements:
+  - name: Unlimited Reports
+  - name: Custom Charts
+  - name: Custom Dataset Views
+  - name: Git Repository Connection
+  - name: Google SSO
+- id: holistics-scs
+  name: Security Compliance Suite
+  type: subscription
+  description: >-
+    Everything in Standard plus RBAC, pass-through authentication, Enterprise
+    SSO/SAML, SCIM provisioning, user activity monitoring, IP whitelisting, and
+    export/shareable-link controls.
+  entries:
+  - label: Platform Subscription
+    name: scs_platform
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $2,400/month ($2,000/month annual)
+    userMultiplied: false
+  - label: Included Users
+    name: scs_users
+    type: flat
+    metric: users
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 10
+    price: included
+    userMultiplied: false
+  - label: Additional User
+    name: scs_additional_user
+    type: usage
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $18/month per user
+    userMultiplied: true
+  elements:
+  - name: RBAC
+  - name: Enterprise SSO / SAML
+  - name: SCIM Provisioning
+  - name: Pass-Through Authentication
+  - name: IP Whitelisting
+- id: holistics-embedded
+  name: Embedded Analytics
+  type: enterprise
+  description: >-
+    Separate model for embedding row-level-secured dashboards into customer
+    applications via JWT-signed embed tokens, with unlimited dashboard viewers
+    and white-labeling. Quote-based.
+  entries:
+  - label: Embedded Agreement
+    name: embedded
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Unlimited Viewers
+  - name: White-Labeling
+  - name: JWT Embed Tokens
+- id: holistics-custom
+  name: Custom
+  type: enterprise
+  description: >-
+    Personalized pricing and features for enterprise needs. Contact Holistics
+    sales.
+  entries:
+  - label: Custom Agreement
+    name: custom
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

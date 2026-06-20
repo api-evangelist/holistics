@@ -1,0 +1,94 @@
+aid: holistics
+name: Holistics
+review:
+  question: Does Holistics expose a documented public WebSocket or streaming API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Holistics exposes only REST (HTTPS)
+    endpoints. Queries, exports, and data-pipeline runs are modeled as
+    asynchronous jobs that clients submit and then poll via REST job-status
+    endpoints (get_query_results.json, get_export_results.json,
+    jobs/<id>/logs.json, jobs/last_run_jobs.json). This is request/response
+    polling, not Server-Sent Events or WebSocket, so there is no event-driven
+    surface to model.
+findings:
+  summary: |
+    Holistics does not publish a documented public WebSocket or SSE streaming
+    API. The platform exposes REST (HTTPS) endpoints under regional hosts
+    (secure.holistics.io for APAC, us.holistics.io for US, eu.holistics.io for
+    EU) at /api/v2, authenticated with a per-user API key in the
+    X-Holistics-Key header. Long-running work (report/dataset queries, exports,
+    data imports and transforms) is submitted as jobs and polled for status and
+    results over REST. Embedded analytics is delivered not as a data API but as
+    a signed-URL surface: the host application's backend signs a JWT (HS256)
+    with a shared secret, embedding customer_id, exp, and dynamic filter claims,
+    then loads the dashboard via
+    https://secure.holistics.io/embed/<embed_code>?_token=<jwt> with row-level
+    security enforced from the token claims. No bidirectional or push transport
+    is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://secure.holistics.io/api/v2
+      documented: true
+    - protocol: Polling
+      scheme: https
+      note: Asynchronous query/export/pipeline jobs submitted then polled via REST job-status endpoints. Not SSE or WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Holistics API reference, data pipeline, report data, or embedded analytics docs as of the review date.
+  embedTokens:
+    mechanism: JWT (HS256) signed server-side with a shared embed secret
+    urlPattern: https://secure.holistics.io/embed/<embed_code>?_token=<jwt>
+    claims:
+      - customer_id (required, must not be modified)
+      - exp (required Unix expiry; recommended 24h)
+      - dynamic filter values (e.g. brands, partner_ids, employee_ids)
+    note: Payload is signed but not encrypted; do not place sensitive data in claims.
+  webhooks:
+    documented: false
+    note: No outbound webhook / event-subscription mechanism is documented; consumers poll job-status endpoints instead.
+  endpointsConfirmedRest:
+    - GET  https://secure.holistics.io/api/v2/data_sets
+    - GET  https://secure.holistics.io/api/v2/data_sets/{id}
+    - POST https://secure.holistics.io/api/v2/data_sets/{id}/submit_query
+    - POST https://secure.holistics.io/api/v2/data_sets/{id}/generate_sql
+    - GET  https://secure.holistics.io/api/v2/queries/{report_id}/submit_query.json
+    - GET  https://secure.holistics.io/api/v2/queries/get_query_results.json
+    - GET  https://secure.holistics.io/api/v2/queries/{report_id}/submit_export.{format}
+    - GET  https://secure.holistics.io/api/v2/queries/get_export_results.json
+    - GET  https://secure.holistics.io/api/v2/exports/download
+    - POST https://secure.holistics.io/api/v2/data_imports/{data_import_id}/execute.json
+    - POST https://secure.holistics.io/api/v2/data_transforms/{data_transform_id}/execute.json
+    - GET  https://secure.holistics.io/api/v2/jobs/{job_id}/logs.json
+    - GET  https://secure.holistics.io/api/v2/jobs/last_run_jobs.json
+sources:
+  - url: https://docs-v2.holistics.io/api
+    type: APIReference
+    note: API overview; regional base URLs and X-Holistics-Key header authentication.
+  - url: https://docs-v2.holistics.io/api/data-pipeline-api
+    type: Documentation
+    note: Execute data imports/transforms; job logs and last_run_jobs status endpoints.
+  - url: https://docs-v2.holistics.io/api/getting-report-data-api
+    type: Documentation
+    note: Submit report queries/exports; poll results; download exports. All REST.
+  - url: https://docs.holistics.io/api/v2/query-data
+    type: APIReference
+    note: Dataset query endpoints (submit_query, generate_sql) on the semantic layer.
+  - url: https://docs-v2.holistics.io/docs/embedded-analytics/
+    type: Documentation
+    note: Embedded analytics uses server-side JWT-signed tokens and an /embed/<code>?_token= URL, not a streaming API.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE surface exists, and no outbound webhook mechanism is
+    documented. Asynchronous work is handled via REST job submission and
+    polling, which is already captured in the OpenAPI definition. Therefore no
+    AsyncAPI document was authored. Embedded analytics is a signed-URL JWT
+    surface documented in apis.yml and this review rather than a data API.

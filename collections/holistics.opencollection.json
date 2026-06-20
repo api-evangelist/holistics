@@ -1,0 +1,210 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Holistics API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "X-Holistics-Key",
+        "value": "{{holisticsApiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/data_sets"
+          },
+          "docs": "Returns the datasets the calling user can query."
+        },
+        {
+          "info": {
+            "name": "Get dataset dimensions and metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/data_sets/{id}"
+          },
+          "docs": "Returns the available dimensions and metrics for a dataset."
+        },
+        {
+          "info": {
+            "name": "Query a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.holistics.io/api/v2/data_sets/{id}/submit_query",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"dimensions\": [],\n  \"metrics\": [],\n  \"filters\": [],\n  \"limit\": 1000\n}"
+            }
+          },
+          "docs": "Executes a query against a dataset and returns result rows."
+        },
+        {
+          "info": {
+            "name": "Generate SQL without executing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.holistics.io/api/v2/data_sets/{id}/generate_sql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"dimensions\": [],\n  \"metrics\": [],\n  \"filters\": [],\n  \"limit\": 1000\n}"
+            }
+          },
+          "docs": "Returns the SQL that would be generated for a dataset query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a report query job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/queries/{report_id}/submit_query.json"
+          },
+          "docs": "Submits a query job for a report and returns a job id to poll."
+        },
+        {
+          "info": {
+            "name": "Retrieve report query results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/queries/get_query_results.json?job_id={job_id}&_page_size=100&_page=1"
+          },
+          "docs": "Retrieves the paginated results of a submitted query job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a report export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/queries/{report_id}/submit_export.{format}"
+          },
+          "docs": "Submits an export job for a report in csv, json, or xlsx format."
+        },
+        {
+          "info": {
+            "name": "Retrieve export job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/queries/get_export_results.json?job_id={job_id}"
+          },
+          "docs": "Returns the status of a submitted export job."
+        },
+        {
+          "info": {
+            "name": "Download an export result file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/exports/download?job_id={job_id}"
+          },
+          "docs": "Downloads the exported file once the export job status is success."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Pipeline",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a data import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.holistics.io/api/v2/data_imports/{data_import_id}/execute.json"
+          },
+          "docs": "Triggers execution of a Holistics data import."
+        },
+        {
+          "info": {
+            "name": "Execute a data transform job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.holistics.io/api/v2/data_transforms/{data_transform_id}/execute.json"
+          },
+          "docs": "Triggers execution of a Holistics data transform."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "View running job information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/jobs/{job_id}/logs.json"
+          },
+          "docs": "Returns logs and runtime information for a job."
+        },
+        {
+          "info": {
+            "name": "Check status of recent ETL jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/jobs/last_run_jobs.json?source_type=DataTransform&ids[]=1"
+          },
+          "docs": "Returns the most recent job for each requested data import or transform."
+        }
+      ]
+    }
+  ]
+}

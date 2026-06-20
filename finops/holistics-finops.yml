@@ -1,0 +1,98 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Holistics
+providerId: holistics
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Business Intelligence
+- Analytics
+- Self-Service BI
+- Data Modeling
+- Embedded Analytics
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Holistics spend. Holistics bills a fixed monthly (or
+  discounted annual) platform subscription per tier (Entry, Standard, Security
+  Compliance Suite), each including the first 10 users, with additional users
+  and additional report packs billed as add-ons. The REST and Embed APIs are
+  capabilities of the subscription rather than separately metered usage.
+  Embedded Analytics and Custom enterprise tiers are quote-based. Primary cost
+  drivers are tier selection, seat count above the included 10, and report
+  volume above the Entry allotment.
+notes: >-
+  Subscription list prices are subject to change and vary by region and billing
+  cadence; verify against the Holistics pricing page during reconciliation.
+sources:
+- https://www.holistics.io/pricing/
+- https://docs-v2.holistics.io/api
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Holistics
+serviceCategory: Analytics and Business Intelligence
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Holistics
+  ServiceCategory: Analytics and Business Intelligence
+  ProviderName: Holistics
+  PublisherName: Holistics
+  InvoiceIssuerName: Holistics
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: platform_subscription
+  description: Fixed monthly or annual platform fee per plan tier (Entry, Standard, SCS).
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: additional_users
+  description: Seats billed beyond the 10 users included in each tier.
+  unit: users
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: additional_reports
+  description: Report packs billed beyond the Entry tier's 100-report allotment.
+  unit: reports
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: embedded_analytics
+  description: Quote-based Embedded Analytics agreement with unlimited viewers and white-labeling.
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track plan tier, seat count, and report volume against the included allotments to anticipate add-on charges.
+- name: Allocation
+  description: Map seats and reports to teams; tag embedded deployments to the products that consume them.
+- name: Optimization
+  description: Choose the lowest tier that meets security/SSO needs; prefer annual billing for the discount; reclaim unused seats and prune unused reports under the Entry allotment.
+- name: Accountability
+  description: Assign an owner for the Holistics subscription; review seat growth and add-ons each renewal cycle against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
