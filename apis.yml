@@ -120,6 +120,10 @@ apis:
     and dynamic filter claims render row-level-secured dashboards via the
     /embed/<embed_code>?_token=<jwt> URL pattern for multi-tenant embedded analytics.
 common:
+- type: DomainSecurity
+  url: security/holistics-domain-security.yml
+- type: Authentication
+  url: authentication/holistics-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/holistics
 - type: LinkedIn
@@ -134,6 +138,8 @@ common:
   url: rate-limits/holistics-rate-limits.yml
 - type: FinOps
   url: finops/holistics-finops.yml
+- url: https://www.holistics.io/blog/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

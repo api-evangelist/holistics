@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/holistics-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: HolisticsKey
+  type: apiKey
+  in: header
+  parameter: X-Holistics-Key
+  description: Per-user API key generated from Holistics user settings.
+  sources:
+  - openapi/holistics-openapi.yml
