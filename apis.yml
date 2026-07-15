@@ -120,6 +120,8 @@ apis:
     and dynamic filter claims render row-level-secured dashboards via the
     /embed/<embed_code>?_token=<jwt> URL pattern for multi-tenant embedded analytics.
 common:
+- type: AgenticAccess
+  url: agentic-access/holistics-agentic-access.yml
 - type: DomainSecurity
   url: security/holistics-domain-security.yml
 - type: Authentication
