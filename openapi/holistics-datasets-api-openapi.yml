@@ -1,0 +1,188 @@
+openapi: 3.0.1
+info:
+  title: Holistics Data Pipeline Datasets API
+  description: REST API for the Holistics business intelligence and self-service analytics platform. Covers the Data Pipeline API (execute data imports/transforms and poll ETL jobs), report and dataset query APIs, and asynchronous data export (CSV/JSON/XLSX). All requests authenticate with a per-user API key passed in the X-Holistics-Key header. Regional hosts are secure.holistics.io (APAC), us.holistics.io (US), and eu.holistics.io (EU).
+  termsOfService: https://www.holistics.io/terms/
+  contact:
+    name: Holistics Support
+    url: https://www.holistics.io
+    email: support@holistics.io
+  version: '2.0'
+servers:
+- url: https://secure.holistics.io/api/v2
+  description: APAC region
+- url: https://us.holistics.io/api/v2
+  description: US region
+- url: https://eu.holistics.io/api/v2
+  description: EU region
+security:
+- HolisticsKey: []
+tags:
+- name: Datasets
+  description: Query the Holistics dataset semantic layer.
+paths:
+  /data_sets:
+    get:
+      operationId: listDataSets
+      tags:
+      - Datasets
+      summary: List available datasets
+      description: Returns the datasets the calling user can query.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataSet'
+  /data_sets/{id}:
+    get:
+      operationId: getDataSet
+      tags:
+      - Datasets
+      summary: Get dataset dimensions and metrics
+      description: Returns the available dimensions and metrics for a dataset.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSetDetail'
+  /data_sets/{id}/submit_query:
+    post:
+      operationId: submitDataSetQuery
+      tags:
+      - Datasets
+      summary: Query a dataset
+      description: Executes a query against a dataset and returns result rows.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+  /data_sets/{id}/generate_sql:
+    post:
+      operationId: generateDataSetSql
+      tags:
+      - Datasets
+      summary: Generate SQL without executing
+      description: Returns the SQL that would be generated for a dataset query.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sql:
+                    type: string
+components:
+  schemas:
+    DataSet:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        title:
+          type: string
+    DataSetDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        dimensions:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+        metrics:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+    QueryResult:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+        columns:
+          type: array
+          items:
+            type: string
+        data:
+          type: array
+          items:
+            type: array
+            items: {}
+    QueryRequest:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          description: Fields to group results by.
+          items:
+            type: string
+        metrics:
+          type: array
+          description: Aggregated measures to calculate.
+          items:
+            type: string
+        filters:
+          type: array
+          description: Conditions for filtering data.
+          items:
+            type: object
+        limit:
+          type: integer
+          description: Maximum number of rows returned.
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    HolisticsKey:
+      type: apiKey
+      in: header
+      name: X-Holistics-Key
+      description: Per-user API key generated from Holistics user settings.

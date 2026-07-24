@@ -1,0 +1,107 @@
+openapi: 3.0.1
+info:
+  title: Holistics Data Pipeline Reports API
+  description: REST API for the Holistics business intelligence and self-service analytics platform. Covers the Data Pipeline API (execute data imports/transforms and poll ETL jobs), report and dataset query APIs, and asynchronous data export (CSV/JSON/XLSX). All requests authenticate with a per-user API key passed in the X-Holistics-Key header. Regional hosts are secure.holistics.io (APAC), us.holistics.io (US), and eu.holistics.io (EU).
+  termsOfService: https://www.holistics.io/terms/
+  contact:
+    name: Holistics Support
+    url: https://www.holistics.io
+    email: support@holistics.io
+  version: '2.0'
+servers:
+- url: https://secure.holistics.io/api/v2
+  description: APAC region
+- url: https://us.holistics.io/api/v2
+  description: US region
+- url: https://eu.holistics.io/api/v2
+  description: EU region
+security:
+- HolisticsKey: []
+tags:
+- name: Reports
+  description: Submit report queries and retrieve results.
+paths:
+  /queries/{report_id}/submit_query.json:
+    get:
+      operationId: submitReportQuery
+      tags:
+      - Reports
+      summary: Submit a report query job
+      description: Submits a query job for a report. Filter values are passed as query parameters. Returns a job id to poll for results.
+      parameters:
+      - $ref: '#/components/parameters/ReportId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSubmitResponse'
+  /queries/get_query_results.json:
+    get:
+      operationId: getQueryResults
+      tags:
+      - Reports
+      summary: Retrieve report query results
+      description: Retrieves the paginated results of a submitted query job.
+      parameters:
+      - name: job_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: _page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: _page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+components:
+  schemas:
+    JobSubmitResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+    QueryResult:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+        columns:
+          type: array
+          items:
+            type: string
+        data:
+          type: array
+          items:
+            type: array
+            items: {}
+  parameters:
+    ReportId:
+      name: report_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    HolisticsKey:
+      type: apiKey
+      in: header
+      name: X-Holistics-Key
+      description: Per-user API key generated from Holistics user settings.

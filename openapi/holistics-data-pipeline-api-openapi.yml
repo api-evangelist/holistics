@@ -1,0 +1,78 @@
+openapi: 3.0.1
+info:
+  title: Holistics Data Pipeline API
+  description: REST API for the Holistics business intelligence and self-service analytics platform. Covers the Data Pipeline API (execute data imports/transforms and poll ETL jobs), report and dataset query APIs, and asynchronous data export (CSV/JSON/XLSX). All requests authenticate with a per-user API key passed in the X-Holistics-Key header. Regional hosts are secure.holistics.io (APAC), us.holistics.io (US), and eu.holistics.io (EU).
+  termsOfService: https://www.holistics.io/terms/
+  contact:
+    name: Holistics Support
+    url: https://www.holistics.io
+    email: support@holistics.io
+  version: '2.0'
+servers:
+- url: https://secure.holistics.io/api/v2
+  description: APAC region
+- url: https://us.holistics.io/api/v2
+  description: US region
+- url: https://eu.holistics.io/api/v2
+  description: EU region
+security:
+- HolisticsKey: []
+tags:
+- name: Data Pipeline
+  description: Execute data imports and transforms.
+paths:
+  /data_imports/{data_import_id}/execute.json:
+    post:
+      operationId: executeDataImport
+      tags:
+      - Data Pipeline
+      summary: Execute a data import job
+      description: Triggers execution of a Holistics data import.
+      parameters:
+      - name: data_import_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSubmitResponse'
+  /data_transforms/{data_transform_id}/execute.json:
+    post:
+      operationId: executeDataTransform
+      tags:
+      - Data Pipeline
+      summary: Execute a data transform job
+      description: Triggers execution of a Holistics data transform.
+      parameters:
+      - name: data_transform_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSubmitResponse'
+components:
+  schemas:
+    JobSubmitResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+  securitySchemes:
+    HolisticsKey:
+      type: apiKey
+      in: header
+      name: X-Holistics-Key
+      description: Per-user API key generated from Holistics user settings.

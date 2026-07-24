@@ -1,0 +1,103 @@
+openapi: 3.0.1
+info:
+  title: Holistics Data Pipeline Jobs API
+  description: REST API for the Holistics business intelligence and self-service analytics platform. Covers the Data Pipeline API (execute data imports/transforms and poll ETL jobs), report and dataset query APIs, and asynchronous data export (CSV/JSON/XLSX). All requests authenticate with a per-user API key passed in the X-Holistics-Key header. Regional hosts are secure.holistics.io (APAC), us.holistics.io (US), and eu.holistics.io (EU).
+  termsOfService: https://www.holistics.io/terms/
+  contact:
+    name: Holistics Support
+    url: https://www.holistics.io
+    email: support@holistics.io
+  version: '2.0'
+servers:
+- url: https://secure.holistics.io/api/v2
+  description: APAC region
+- url: https://us.holistics.io/api/v2
+  description: US region
+- url: https://eu.holistics.io/api/v2
+  description: EU region
+security:
+- HolisticsKey: []
+tags:
+- name: Jobs
+  description: Poll ETL and export job status.
+paths:
+  /jobs/{job_id}/logs.json:
+    get:
+      operationId: getJobLogs
+      tags:
+      - Jobs
+      summary: View running job information
+      description: Returns logs and runtime information for a job.
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+  /jobs/last_run_jobs.json:
+    get:
+      operationId: getLastRunJobs
+      tags:
+      - Jobs
+      summary: Check status of recent ETL jobs
+      description: Returns the most recent job for each requested data import or transform.
+      parameters:
+      - name: source_type
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - DataImport
+          - DataTransform
+      - name: ids
+        in: query
+        required: true
+        description: Comma-separated list of import or transform IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+          description: e.g. running, success, failed.
+        source_type:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    HolisticsKey:
+      type: apiKey
+      in: header
+      name: X-Holistics-Key
+      description: Per-user API key generated from Holistics user settings.

@@ -1,0 +1,130 @@
+openapi: 3.0.1
+info:
+  title: Holistics Data Pipeline Export API
+  description: REST API for the Holistics business intelligence and self-service analytics platform. Covers the Data Pipeline API (execute data imports/transforms and poll ETL jobs), report and dataset query APIs, and asynchronous data export (CSV/JSON/XLSX). All requests authenticate with a per-user API key passed in the X-Holistics-Key header. Regional hosts are secure.holistics.io (APAC), us.holistics.io (US), and eu.holistics.io (EU).
+  termsOfService: https://www.holistics.io/terms/
+  contact:
+    name: Holistics Support
+    url: https://www.holistics.io
+    email: support@holistics.io
+  version: '2.0'
+servers:
+- url: https://secure.holistics.io/api/v2
+  description: APAC region
+- url: https://us.holistics.io/api/v2
+  description: US region
+- url: https://eu.holistics.io/api/v2
+  description: EU region
+security:
+- HolisticsKey: []
+tags:
+- name: Export
+  description: Asynchronous report data export jobs.
+paths:
+  /queries/{report_id}/submit_export.{format}:
+    get:
+      operationId: submitReportExport
+      tags:
+      - Export
+      summary: Submit a report export job
+      description: Submits an export job for a report in the given format. Filter values are passed as query parameters. Returns an export job id.
+      parameters:
+      - $ref: '#/components/parameters/ReportId'
+      - name: format
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+          - xlsx
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSubmitResponse'
+  /queries/get_export_results.json:
+    get:
+      operationId: getExportResults
+      tags:
+      - Export
+      summary: Retrieve export job status
+      description: Returns the status of a submitted export job.
+      parameters:
+      - name: job_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+  /exports/download:
+    get:
+      operationId: downloadExport
+      tags:
+      - Export
+      summary: Download an export result file
+      description: Downloads the exported file once the export job status is success.
+      parameters:
+      - name: job_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+          description: e.g. running, success, failed.
+        source_type:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+    JobSubmitResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+  parameters:
+    ReportId:
+      name: report_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    HolisticsKey:
+      type: apiKey
+      in: header
+      name: X-Holistics-Key
+      description: Per-user API key generated from Holistics user settings.
