@@ -1,0 +1,22 @@
+{
+  "provider": "holistics",
+  "sources": [
+    "holistics-data-pipeline-api-openapi.yml",
+    "holistics-datasets-api-openapi.yml",
+    "holistics-export-api-openapi.yml",
+    "holistics-jobs-api-openapi.yml",
+    "holistics-reports-api-openapi.yml"
+  ],
+  "outputs": [
+    "holistics-data-pipeline-api-openapi.yml",
+    "holistics-datasets-api-openapi.yml",
+    "holistics-export-api-openapi.yml",
+    "holistics-jobs-api-openapi.yml",
+    "holistics-reports-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
