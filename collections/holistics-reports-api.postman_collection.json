@@ -1,0 +1,257 @@
+{
+  "item": [
+    {
+      "id": "9f2666a1-f028-478a-b45f-ea196b2c4b05",
+      "name": "Reports",
+      "description": {
+        "content": "Submit report queries and retrieve results.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f6fa08fe-57be-493e-ac1c-53a92e0f4f4c",
+          "name": "Submit a report query job",
+          "request": {
+            "name": "Submit a report query job",
+            "description": {
+              "content": "Submits a query job for a report. Filter values are passed as query parameters. Returns a job id to poll for results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "queries",
+                ":report_id",
+                "submit_query.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "report_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81b6f98e-cecc-4b2a-92bc-aafff1c37f07",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "queries",
+                    ":report_id",
+                    "submit_query.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "report_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Holistics-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ee104e3-0bdc-4e1a-adc1-8dbe84f3faf5",
+          "name": "Retrieve report query results",
+          "request": {
+            "name": "Retrieve report query results",
+            "description": {
+              "content": "Retrieves the paginated results of a submitted query job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "queries",
+                "get_query_results.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "job_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "_page_size",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97dd4326-bae9-472a-8e47-211826432ddf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "queries",
+                    "get_query_results.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "job_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Holistics-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\",\n  \"status\": \"string\",\n  \"columns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": [\n    [],\n    []\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.holistics.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Holistics-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fc6ff14a-81f7-48aa-ac2b-7e28736107f4",
+    "name": "Holistics Data Pipeline Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Holistics business intelligence and self-service analytics platform. Covers the Data Pipeline API (execute data imports/transforms and poll ETL jobs), report and dataset query APIs, and asynchronous data export (CSV/JSON/XLSX). All requests authenticate with a per-user API key passed in the X-Holistics-Key header. Regional hosts are secure.holistics.io (APAC), us.holistics.io (US), and eu.holistics.io (EU).\n\nContact Support:\n Name: Holistics Support\n Email: support@holistics.io",
+      "type": "text/plain"
+    }
+  }
+}

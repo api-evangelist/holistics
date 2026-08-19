@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Holistics Data Pipeline API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Holistics-Key",
+      "value": "{{X-Holistics-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Pipeline",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a data import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.holistics.io/api/v2/data_imports/:data_import_id/execute.json",
+            "params": [
+              {
+                "name": "data_import_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Triggers execution of a Holistics data import."
+        },
+        {
+          "info": {
+            "name": "Execute a data transform job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.holistics.io/api/v2/data_transforms/:data_transform_id/execute.json",
+            "params": [
+              {
+                "name": "data_transform_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Triggers execution of a Holistics data transform."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

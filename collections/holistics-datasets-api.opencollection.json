@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Holistics Data Pipeline Datasets API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Holistics-Key",
+      "value": "{{X-Holistics-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/data_sets"
+          },
+          "docs": "Returns the datasets the calling user can query."
+        },
+        {
+          "info": {
+            "name": "Get dataset dimensions and metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/data_sets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the available dimensions and metrics for a dataset."
+        },
+        {
+          "info": {
+            "name": "Query a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.holistics.io/api/v2/data_sets/:id/submit_query",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a query against a dataset and returns result rows."
+        },
+        {
+          "info": {
+            "name": "Generate SQL without executing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.holistics.io/api/v2/data_sets/:id/generate_sql",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the SQL that would be generated for a dataset query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

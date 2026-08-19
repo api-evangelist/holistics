@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Holistics Data Pipeline Jobs API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Holistics-Key",
+      "value": "{{X-Holistics-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "View running job information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/jobs/:job_id/logs.json",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns logs and runtime information for a job."
+        },
+        {
+          "info": {
+            "name": "Check status of recent ETL jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/jobs/last_run_jobs.json",
+            "params": [
+              {
+                "name": "source_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of import or transform IDs."
+              }
+            ]
+          },
+          "docs": "Returns the most recent job for each requested data import or transform."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

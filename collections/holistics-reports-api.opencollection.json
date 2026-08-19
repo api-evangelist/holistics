@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Holistics Data Pipeline Reports API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Holistics-Key",
+      "value": "{{X-Holistics-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a report query job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/queries/:report_id/submit_query.json",
+            "params": [
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Submits a query job for a report. Filter values are passed as query parameters. Returns a job id to poll for results."
+        },
+        {
+          "info": {
+            "name": "Retrieve report query results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/queries/get_query_results.json",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the paginated results of a submitted query job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Holistics Data Pipeline Export API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Holistics-Key",
+      "value": "{{X-Holistics-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a report export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/queries/:report_id/submit_export.:format",
+            "params": [
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Submits an export job for a report in the given format. Filter values are passed as query parameters. Returns an export job id."
+        },
+        {
+          "info": {
+            "name": "Retrieve export job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/queries/get_export_results.json",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the status of a submitted export job."
+        },
+        {
+          "info": {
+            "name": "Download an export result file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.holistics.io/api/v2/exports/download",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads the exported file once the export job status is success."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

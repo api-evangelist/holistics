@@ -1,0 +1,259 @@
+{
+  "item": [
+    {
+      "id": "15d23975-b5e4-447b-99b7-2d59eb74e45b",
+      "name": "Jobs",
+      "description": {
+        "content": "Poll ETL and export job status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52d47901-f035-49c3-92a6-ecd4b0556b46",
+          "name": "View running job information",
+          "request": {
+            "name": "View running job information",
+            "description": {
+              "content": "Returns logs and runtime information for a job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":job_id",
+                "logs.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a433e8ed-d094-4485-a9eb-c4e8aa17eb39",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":job_id",
+                    "logs.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Holistics-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9885,\n  \"status\": \"string\",\n  \"source_type\": \"string\",\n  \"start_time\": \"1954-05-05T23:28:12.870Z\",\n  \"end_time\": \"1983-07-19T16:36:07.378Z\",\n  \"created_at\": \"1963-08-11T11:25:37.457Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09d9cc57-10c6-4399-ad0d-17538cb23c9a",
+          "name": "Check status of recent ETL jobs",
+          "request": {
+            "name": "Check status of recent ETL jobs",
+            "description": {
+              "content": "Returns the most recent job for each requested data import or transform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                "last_run_jobs.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "source_type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<integer>",
+                  "description": "(Required) Comma-separated list of import or transform IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<integer>",
+                  "description": "(Required) Comma-separated list of import or transform IDs."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "280ad3e4-0f0e-48ad-8f05-dc445195286e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    "last_run_jobs.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "source_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Holistics-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 5451,\n    \"status\": \"string\",\n    \"source_type\": \"string\",\n    \"start_time\": \"1998-08-23T03:17:30.545Z\",\n    \"end_time\": \"2003-01-09T12:34:37.224Z\",\n    \"created_at\": \"1950-09-27T15:48:16.435Z\"\n  },\n  {\n    \"id\": 7087,\n    \"status\": \"string\",\n    \"source_type\": \"string\",\n    \"start_time\": \"1949-08-01T18:36:25.265Z\",\n    \"end_time\": \"1988-12-14T01:09:58.262Z\",\n    \"created_at\": \"2026-08-12T08:23:48.431Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.holistics.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Holistics-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "13581f19-c002-43b1-b6b9-589826023fcd",
+    "name": "Holistics Data Pipeline Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Holistics business intelligence and self-service analytics platform. Covers the Data Pipeline API (execute data imports/transforms and poll ETL jobs), report and dataset query APIs, and asynchronous data export (CSV/JSON/XLSX). All requests authenticate with a per-user API key passed in the X-Holistics-Key header. Regional hosts are secure.holistics.io (APAC), us.holistics.io (US), and eu.holistics.io (EU).\n\nContact Support:\n Name: Holistics Support\n Email: support@holistics.io",
+      "type": "text/plain"
+    }
+  }
+}
