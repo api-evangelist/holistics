@@ -30,7 +30,7 @@ tags:
 - Embedded Analytics
 created: '2026-06-20'
 modified: '2026-06-20'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: holistics:holistics-data-pipeline-api
   name: Holistics Data Pipeline API
