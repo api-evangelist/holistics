@@ -119,6 +119,8 @@ apis:
   humanURL: https://docs-v2.holistics.io/api/data-pipeline-api
   baseURL: https://secure.holistics.io/api/v2
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
