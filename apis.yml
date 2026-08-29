@@ -8,6 +8,18 @@ description: Holistics is a self-service business intelligence and analytics pla
   datasets and reports, export data to CSV/JSON/XLSX, trigger data imports and
   transforms, and poll ETL jobs, while a JWT-signed Embed API powers embedded,
   multi-tenant analytics inside customer applications.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
