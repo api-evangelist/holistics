@@ -1,0 +1,1 @@
+{"resource":"https://mcp-apac.holistics.io","authorization_servers":["https://secure.holistics.io/mcp"],"bearer_methods_supported":["header"],"resource_name":"Holistics MCP","resource_documentation":"https://docs.holistics.io/docs/ai/mcp-server"}

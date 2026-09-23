@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Holistics Data Pipeline Export API
+  title: Holistics Export API
   description: REST API for the Holistics business intelligence and self-service analytics platform. Covers the Data Pipeline API (execute data imports/transforms and poll ETL jobs), report and dataset query APIs, and asynchronous data export (CSV/JSON/XLSX). All requests authenticate with a per-user API key passed in the X-Holistics-Key header. Regional hosts are secure.holistics.io (APAC), us.holistics.io (US), and eu.holistics.io (EU).
   termsOfService: https://www.holistics.io/terms/
   contact:
@@ -89,6 +89,13 @@ paths:
                 format: binary
 components:
   schemas:
+    JobSubmitResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
     Job:
       type: object
       properties:
@@ -108,13 +115,6 @@ components:
         created_at:
           type: string
           format: date-time
-    JobSubmitResponse:
-      type: object
-      properties:
-        job_id:
-          type: string
-        status:
-          type: string
   parameters:
     ReportId:
       name: report_id
