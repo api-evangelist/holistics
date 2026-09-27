@@ -69,13 +69,6 @@ paths:
                 $ref: '#/components/schemas/QueryResult'
 components:
   schemas:
-    JobSubmitResponse:
-      type: object
-      properties:
-        job_id:
-          type: string
-        status:
-          type: string
     QueryResult:
       type: object
       properties:
@@ -92,6 +85,13 @@ components:
           items:
             type: array
             items: {}
+    JobSubmitResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
   parameters:
     ReportId:
       name: report_id

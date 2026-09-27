@@ -89,13 +89,6 @@ paths:
                 format: binary
 components:
   schemas:
-    JobSubmitResponse:
-      type: object
-      properties:
-        job_id:
-          type: string
-        status:
-          type: string
     Job:
       type: object
       properties:
@@ -115,6 +108,13 @@ components:
         created_at:
           type: string
           format: date-time
+    JobSubmitResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
   parameters:
     ReportId:
       name: report_id

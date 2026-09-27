@@ -102,6 +102,40 @@ paths:
                     type: string
 components:
   schemas:
+    DataSetDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        dimensions:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+        metrics:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+    DataSet:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        title:
+          type: string
     QueryResult:
       type: object
       properties:
@@ -139,40 +173,6 @@ components:
         limit:
           type: integer
           description: Maximum number of rows returned.
-    DataSet:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        title:
-          type: string
-    DataSetDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        dimensions:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              type:
-                type: string
-        metrics:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              type:
-                type: string
   parameters:
     PathId:
       name: id
