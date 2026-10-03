@@ -68,6 +68,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/QueryResult'
 components:
+  parameters:
+    ReportId:
+      name: report_id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
     QueryResult:
       type: object
@@ -92,13 +99,6 @@ components:
           type: string
         status:
           type: string
-  parameters:
-    ReportId:
-      name: report_id
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     HolisticsKey:
       type: apiKey

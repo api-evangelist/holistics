@@ -101,6 +101,13 @@ paths:
                   sql:
                     type: string
 components:
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
     DataSetDetail:
       type: object
@@ -127,15 +134,6 @@ components:
                 type: string
               type:
                 type: string
-    DataSet:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        title:
-          type: string
     QueryResult:
       type: object
       properties:
@@ -173,13 +171,15 @@ components:
         limit:
           type: integer
           description: Maximum number of rows returned.
-  parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    DataSet:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        title:
+          type: string
   securitySchemes:
     HolisticsKey:
       type: apiKey
