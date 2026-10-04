@@ -76,6 +76,13 @@ components:
       schema:
         type: integer
   schemas:
+    JobSubmitResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
     QueryResult:
       type: object
       properties:
@@ -92,13 +99,6 @@ components:
           items:
             type: array
             items: {}
-    JobSubmitResponse:
-      type: object
-      properties:
-        job_id:
-          type: string
-        status:
-          type: string
   securitySchemes:
     HolisticsKey:
       type: apiKey

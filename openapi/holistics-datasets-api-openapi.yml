@@ -109,6 +109,36 @@ components:
       schema:
         type: integer
   schemas:
+    QueryRequest:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          description: Fields to group results by.
+          items:
+            type: string
+        metrics:
+          type: array
+          description: Aggregated measures to calculate.
+          items:
+            type: string
+        filters:
+          type: array
+          description: Conditions for filtering data.
+          items:
+            type: object
+        limit:
+          type: integer
+          description: Maximum number of rows returned.
+    DataSet:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        title:
+          type: string
     DataSetDetail:
       type: object
       properties:
@@ -150,36 +180,6 @@ components:
           items:
             type: array
             items: {}
-    QueryRequest:
-      type: object
-      properties:
-        dimensions:
-          type: array
-          description: Fields to group results by.
-          items:
-            type: string
-        metrics:
-          type: array
-          description: Aggregated measures to calculate.
-          items:
-            type: string
-        filters:
-          type: array
-          description: Conditions for filtering data.
-          items:
-            type: object
-        limit:
-          type: integer
-          description: Maximum number of rows returned.
-    DataSet:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        title:
-          type: string
   securitySchemes:
     HolisticsKey:
       type: apiKey
