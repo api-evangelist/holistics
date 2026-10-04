@@ -35,6 +35,9 @@ accessModel:
   generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/holistics.png
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
 - Business Intelligence
 - Analytics
@@ -183,6 +186,9 @@ apis:
   - type: APIReference
     url: https://www.holistics.io/bi-tools/concepts/jwt-embedding/
 common:
+- type: CapabilityMap
+  url: capabilities/holistics-capability-edges.yml
+  name: Holistics Business Capability Map
 - type: AgenticAccess
   url: agentic-access/holistics-agentic-access.yml
 - type: DomainSecurity
