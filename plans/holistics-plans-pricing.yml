@@ -222,3 +222,58 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - negotiated
+  - object
+  - period
+  - seat
+  plans:
+  - name: Entry
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - object
+    - period
+    - seat
+    periods:
+    - month
+  - name: Standard
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - period
+    - seat
+    periods:
+    - month
+  - name: Security Compliance Suite
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - period
+    - seat
+    periods:
+    - month
+  - name: Embedded Analytics
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
+  - name: Custom
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
