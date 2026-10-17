@@ -88,13 +88,6 @@ paths:
                 type: string
                 format: binary
 components:
-  parameters:
-    ReportId:
-      name: report_id
-      in: path
-      required: true
-      schema:
-        type: integer
   schemas:
     JobSubmitResponse:
       type: object
@@ -122,6 +115,13 @@ components:
         created_at:
           type: string
           format: date-time
+  parameters:
+    ReportId:
+      name: report_id
+      in: path
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     HolisticsKey:
       type: apiKey
