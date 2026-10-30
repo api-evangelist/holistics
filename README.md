@@ -1,4 +1,4 @@
-# Holistics (holistics)
+# Holistics
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,138 +66,132 @@
 
 Holistics is a self-service business intelligence and analytics platform built around code-based data modeling (AML - Analytics Modeling Language), Git version control, and a SQL/dataset semantic layer. Its REST API lets teams query datasets and reports, export data to CSV/JSON/XLSX, trigger data imports and transforms, and poll ETL jobs, while a JWT-signed Embed API powers embedded, multi-tenant analytics inside customer applications.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/holistics/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/holistics/refs/heads/main/apis.yml)
+**Areas:** Business Intelligence · Analytics · Self-Service BI · Data Modeling · Embedded Analytics
 
-## Tags
+## Holistics on APIs.io
 
-- Business Intelligence
-- Analytics
-- Self-Service BI
-- Data Modeling
-- Embedded Analytics
+Everything profiled for Holistics is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/holistics/](https://apis.io/providers/holistics/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Holistics Data Pipeline API](https://apis.io/apis/holistics/holistics-data-pipeline-api/) — Execute data imports and transforms.
+- [Holistics Datasets API](https://apis.io/apis/holistics/holistics-datasets-api/) — Query the Holistics dataset semantic layer.
+- [Holistics Export API](https://apis.io/apis/holistics/holistics-export-api/) — Asynchronous report data export jobs.
+- [Holistics Jobs API](https://apis.io/apis/holistics/holistics-jobs-api/) — Poll ETL and export job status.
+- [Holistics Reports API](https://apis.io/apis/holistics/holistics-reports-api/) — Submit report queries and retrieve results.
 
-## APIs
+### Published properties
 
-### Holistics Data Schedules & Jobs API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Programmatically execute data imports and data transforms, and poll ETL job status (logs and last-run jobs) for Holistics data pipelines.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs-v2.holistics.io/api/data-pipeline-api](https://docs-v2.holistics.io/api/data-pipeline-api)
-- **Base URL:** `https://secure.holistics.io/api/v2`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [holistics](https://apis.io/servers/holistics/holistics/)
 
-- Data Pipeline
-- Jobs
-- ETL
-- Schedules
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs-v2.holistics.io/api/data-pipeline-api)
-- [API Reference](https://docs-v2.holistics.io/api)
-- [OpenAPI](openapi/holistics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/holistics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/holistics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Holistics Agentic Access](https://apis.io/agentic-access/holistics/holistics-agentic-access/)
 
-### Holistics Dashboards & Reports API
+#### Collections (6)
 
-Submit report and dataset queries, generate SQL without executing, and retrieve paginated query results from Holistics reports and the dataset semantic layer.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs-v2.holistics.io/api/getting-report-data-api](https://docs-v2.holistics.io/api/getting-report-data-api)
-- **Base URL:** `https://secure.holistics.io/api/v2`
+- [Holistics API](https://apis.io/collections/holistics/open-holistics/)
+- [Holistics Data Pipeline API](https://apis.io/collections/holistics/open-holistics-data-pipeline-api/)
+- [Holistics Data Pipeline Datasets API](https://apis.io/collections/holistics/open-holistics-datasets-api/)
+- [Holistics Data Pipeline Export API](https://apis.io/collections/holistics/open-holistics-export-api/)
+- [Holistics Data Pipeline Jobs API](https://apis.io/collections/holistics/open-holistics-jobs-api/)
+- [Holistics Data Pipeline Reports API](https://apis.io/collections/holistics/open-holistics-reports-api/)
 
-#### Tags
+#### Security (2)
 
-- Reports
-- Dashboards
-- Datasets
-- Query
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Holistics Authentication](https://apis.io/security/holistics/holistics-authentication/)
+- [Holistics Domain Security](https://apis.io/security/holistics/holistics-domain-security/)
 
-- [Documentation](https://docs-v2.holistics.io/api/getting-report-data-api)
-- [API Reference](https://docs.holistics.io/api/v2/query-data)
-- [OpenAPI](openapi/holistics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/holistics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/holistics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Holistics Export API
+Published plans, tiers and prices.
 
-Submit asynchronous export jobs for report data in CSV, JSON, or XLSX format, poll export job status, and download the resulting file.
+- [Holistics Plans Pricing](https://apis.io/plans/holistics/holistics-plans-pricing/)
 
-- **Human URL:** [https://docs-v2.holistics.io/api/getting-report-data-api](https://docs-v2.holistics.io/api/getting-report-data-api)
-- **Base URL:** `https://secure.holistics.io/api/v2`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Export
-- CSV
-- JSON
-- XLSX
+- [Holistics Rate Limits](https://apis.io/rate-limits/holistics/holistics-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://docs-v2.holistics.io/api/getting-report-data-api)
-- [OpenAPI](openapi/holistics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/holistics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/holistics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Holistics Users & Permissions API
+- [Holistics Finops](https://apis.io/finops/holistics/holistics-finops/)
 
-Per-user API keys generated in user settings authorize programmatic access via the X-Holistics-Key header; permissions and row-level access follow the calling user's account scope.
+## Where to find this API
 
-- **Human URL:** [https://docs-v2.holistics.io/docs/holistics-api-for-python-and-programmatic-platform-access](https://docs-v2.holistics.io/docs/holistics-api-for-python-and-programmatic-platform-access)
-- **Base URL:** `https://secure.holistics.io/api/v2`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Users
-- Permissions
-- API Keys
-- Authentication
-
-#### Properties
-
-- [Documentation](https://docs-v2.holistics.io/docs/holistics-api-for-python-and-programmatic-platform-access)
-- [OpenAPI](openapi/holistics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### Holistics Embedded Analytics API
-
-Server-side JWT (HS256) signed embed tokens carrying customer_id, exp, and dynamic filter claims render row-level-secured dashboards via the /embed/<embed_code>?_token=<jwt> URL pattern for multi-tenant embedded analytics.
-
-- **Human URL:** [https://docs-v2.holistics.io/docs/embedded-analytics/](https://docs-v2.holistics.io/docs/embedded-analytics/)
-- **Base URL:** `https://secure.holistics.io`
-
-#### Tags
-
-- Embedded Analytics
-- JWT
-- Embed Token
-- Multi-Tenant
-
-#### Properties
-
-- [Documentation](https://docs-v2.holistics.io/docs/embedded-analytics/)
-- [API Reference](https://www.holistics.io/bi-tools/concepts/jwt-embedding/)
-- [OpenAPI](openapi/holistics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/holistics)
-- [LinkedIn](https://www.linkedin.com/company/holistics)
 - [Website](https://www.holistics.io)
 - [Documentation](https://docs-v2.holistics.io/api)
-- [Plans](plans/holistics-plans-pricing.yml)
-- [Rate Limits](rate-limits/holistics-rate-limits.yml)
-- [Fin Ops](finops/holistics-finops.yml)
+- [Blog](https://www.holistics.io/blog/)
+- [GitHub](https://github.com/holistics)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.9** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 47.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 42.4** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/holistics/](https://apis.io/providers/holistics/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Holistics: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/holistics/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
